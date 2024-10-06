@@ -14,12 +14,14 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public bool isGrounded;
     private bool wasGrounded;
-
+    
     private int jumpCount = 0; // To track how many jumps have been performed
     public int maxJumps = 2;   // The maximum number of jumps allowed (double jump)
     private bool canJump = true;
+    [Header("SFX")]
+    [SerializeField] private AudioClip jumpSound;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
     }
@@ -50,12 +52,19 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRB.velocity = new Vector2(0, playerRB.velocity.y);
         }
+        
 
         if (Input.GetButtonDown("Jump") && canJump && (isGrounded || jumpCount < maxJumps))
         {
             playerRB.velocity = new Vector2(playerRB.velocity.x, jumpSpeed);
             jumpCount++;  // Increment jump count
             canJump = false; // Disable further jumps until button is released
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                Debug.Log("AudioPlaying");
+                SoundManager.instance.PlaySound(jumpSound);
+            }
         }
 
         // Allow jump again after button release (prevents multiple jumps from holding the button)
