@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -18,11 +19,16 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount = 0; // To track how many jumps have been performed
     public int maxJumps = 2;   // The maximum number of jumps allowed (double jump)
     private bool canJump = true;
+
+    GameObject shield;
+
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
     // Start is called before the first frame update
     void Awake()
     {
+        shield = transform.Find("Shield").gameObject;
+        DeactivateShield();
         playerRB = GetComponent<Rigidbody2D>();
     }
 
@@ -76,5 +82,50 @@ public class PlayerMovement : MonoBehaviour
         // Update the grounded state for the next frame
         wasGrounded = isGrounded;
 
+    }
+    //Both methods set the status of the shield -Lee
+    void ActivateShield()
+    {
+        shield.SetActive(true);
+    }
+    
+    void DeactivateShield()
+    {
+        shield.SetActive(false);
+    }
+
+    bool HasShield()
+    {
+        return shield.activeSelf;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        DamageSource damageSource = collision.GetComponent<DamageSource>();
+        if(damageSource != null)
+        {
+            Destroy(gameObject);
+            Destroy(damageSource.gameObject);
+        }
+        DamageBehavior damageBehavior = collision.GetComponent<DamageBehavior>();
+        if (damageBehavior != null)
+        {
+            if (HasShield())
+            {
+                DeactivateShield();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            Destroy(damageBehavior.gameObject);
+        }
+        ShieldPowerUp shieldPowerUp = collision.GetComponent<ShieldPowerUp>();
+        if (shieldPowerUp != null)
+        {
+            ActivateShield();
+            Destroy(shieldPowerUp.gameObject);
+        }
+        
     }
 }
