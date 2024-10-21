@@ -21,12 +21,12 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount = 0; // To track how many jumps have been performed
     public int maxJumps = 2;   // The maximum number of jumps allowed (double jump)
     private bool canJump = true;
-
+    //Lee - Shield variable
     GameObject shield;
-
+    //Lee - SFX variable
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
-
+    //Lee - IFrame Variables
     [Header("Invulnerability")]
     [SerializeField] private float iFrameTime;
     [SerializeField] private int flashNumber;
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //Lee - Getting the shield and deactivating it on awake
         shield = transform.Find("Shield").gameObject;
         DeactivateShield();
         playerRB = GetComponent<Rigidbody2D>();
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             playerRB.velocity = new Vector2(playerRB.velocity.x, jumpSpeed);
             jumpCount++;  // Increment jump count
             canJump = false; // Disable further jumps until button is released
-
+            //Lee - For playing the jump sound
             if (Input.GetButtonDown("Jump"))
             {
                 Debug.Log("AudioPlaying");
@@ -91,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         wasGrounded = isGrounded;
 
     }
-    //Both methods set the status of the shield -Lee
+    //Lee - All three methods work with the shield
     void ActivateShield()
     {
         shield.SetActive(true);
@@ -106,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
     {
         return shield.activeSelf;
     }
-
+    // Lee - this block is for the colliders and shield
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
@@ -133,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
-
+    // Lee - This code makes the player flash and turn invincible
     private IEnumerator Invulnerability()
     {
         Physics2D.IgnoreLayerCollision(7,8, true);
