@@ -24,20 +24,23 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
+
+    private Animator playerAnimation;
     // Start is called before the first frame update
     void Awake()
     {
         shield = transform.Find("Shield").gameObject;
         DeactivateShield();
         playerRB = GetComponent<Rigidbody2D>();
+        playerAnimation = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); // Checks players feet is touching the ground 
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); // Checks players feet is touching the ground - Bryan
 
-        // Reset jump count if the player lands on the ground
+        // Reset jump count if the player lands on the ground - Bryan
         if (isGrounded && !wasGrounded)
         {
             jumpCount = 0;
@@ -46,15 +49,17 @@ public class PlayerMovement : MonoBehaviour
 
         direction = Input.GetAxis("Horizontal");
 
-        if (direction > 0f)
+        if (direction > 0f) //if player moves right - Bryan
         {
             playerRB.velocity = new Vector2(direction * speed, playerRB.velocity.y);
+            transform.localScale = new Vector2(0.387156f, 0.387156f);
         }
-        else if (direction < 0f)
+        else if (direction < 0f) // if player moves left - Bryan
         {
             playerRB.velocity = new Vector2(direction * speed, playerRB.velocity.y);
+            transform.localScale = new Vector2(-0.387156f, 0.387156f);
         }
-        else
+        else //if that player is idle - Bryan
         {
             playerRB.velocity = new Vector2(0, playerRB.velocity.y);
         }
@@ -81,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Update the grounded state for the next frame
         wasGrounded = isGrounded;
+
+        playerAnimation.SetFloat("Speed", Mathf.Abs(playerRB.velocity.x));
 
     }
     //Both methods set the status of the shield -Lee
