@@ -141,9 +141,9 @@ public class PlayerMovement : MonoBehaviour
         for(int i = 0; i< flashNumber; i++)
         {
             spriteRenderer.color = new Color(1, 0, 0, 0.5f);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(iFrameTime / (flashNumber * 2));
             spriteRenderer.color = Color.white;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(iFrameTime / (flashNumber * 2));
         }
         Physics2D.IgnoreLayerCollision(7, 8, false);
 
