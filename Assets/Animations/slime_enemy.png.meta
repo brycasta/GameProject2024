@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 55155d373d215cc4791ec1630788789b
+guid: 49e7a177416b1214494465fd566f27c2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 80
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,43 +97,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jump_SpriteSheet_0
+      name: slime_enemy_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 297
-        height: 537
+        x: 92
+        y: 107
+        width: 306
+        height: 255
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a1ee147963f4bc4185ba04fbc0fa17c
-      internalID: -1491151174
+      spriteID: 6842d6103897d8c4ebd12f6c2775b3fa
+      internalID: 195659289
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_SpriteSheet_1
+      name: slime_enemy_1
       rect:
         serializedVersion: 2
-        x: 297
-        y: 0
-        width: 297
-        height: 537
+        x: 550
+        y: 106
+        width: 219
+        height: 320
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b38a70b3d7977f4e9f2dc6074ef3244
-      internalID: 1778322370
+      spriteID: 6d0b16c9c3c8cb946ba36413d0cff580
+      internalID: 1688686417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_enemy_2
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 107
+        width: 433
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 363cd0d14ade062458fa6a62c1810613
+      internalID: 1986454726
       vertices: []
       indices: 
       edges: []
@@ -149,8 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      jump_SpriteSheet_0: -1491151174
-      jump_SpriteSheet_1: 1778322370
+      slime_enemy_0: 195659289
+      slime_enemy_1: 1688686417
+      slime_enemy_2: 1986454726
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
