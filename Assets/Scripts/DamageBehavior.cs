@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class DamageBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameOverScript gameOverScript;  // Reference to the GameOverScript
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        DamageSource DamageSource = collision.GetComponent<DamageSource>();
-        if (DamageSource != null)
+        DamageSource damageSource = collision.GetComponent<DamageSource>();
+
+        if (damageSource != null)
         {
-            Destroy(gameObject);
-            Destroy(DamageSource.gameObject);
+            // Trigger the Game Over screen before destroying the player
+            gameOverScript.gameOver();
+
+            // Delay the destruction of the player to ensure the game over screen is triggered first
+            Destroy(gameObject);  // Destroy the enemy
+            Destroy(damageSource.gameObject, 0.1f);  // Delay destroying the player slightly
         }
     }
 }

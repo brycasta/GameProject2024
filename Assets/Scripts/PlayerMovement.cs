@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     private bool wasGrounded;
 
+    private Animator playerAnimation;
+
     private int jumpCount = 0; // To track how many jumps have been performed
     public int maxJumps = 2;   // The maximum number of jumps allowed (double jump)
     private bool canJump = true;
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         DeactivateShield();
         playerRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerAnimation = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -55,13 +58,16 @@ public class PlayerMovement : MonoBehaviour
 
         direction = Input.GetAxis("Horizontal");
 
-        if (direction > 0f)
+        if (direction > 0f) //Player movement going and facing right
         {
             playerRB.velocity = new Vector2(direction * speed, playerRB.velocity.y);
+            transform.localScale = new Vector2(0.4314091f, 0.4314091f);
+            GetComponent<SpriteRenderer>().flipX = false; // Facing right
         }
-        else if (direction < 0f)
+        else if (direction < 0f) //Player movement going and facing left
         {
             playerRB.velocity = new Vector2(direction * speed, playerRB.velocity.y);
+            GetComponent<SpriteRenderer>().flipX = true; // Facing left
         }
         else
         {
@@ -91,7 +97,12 @@ public class PlayerMovement : MonoBehaviour
         // Update the grounded state for the next frame
         wasGrounded = isGrounded;
 
+        //Animation Scripts - Bryan
+        playerAnimation.SetFloat("Speed", Mathf.Abs(playerRB.velocity.x));
+        playerAnimation.SetBool("OnGround", isGrounded);
     }
+
+
     //Lee - All three methods work with the shield
     void ActivateShield()
     {

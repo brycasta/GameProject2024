@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 517d52cf1aa4b7e4bb1252cace8270da
+guid: 55155d373d215cc4791ec1630788789b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 80
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,106 +97,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Walk_Cycle_Spritesheet_0
+      name: jump_SpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 113
-        y: 126
-        width: 210
-        height: 424
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        x: 0
+        y: 0
+        width: 297
+        height: 537
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7880a460aa93eb44c937babeca595eb6
-      internalID: -1526786943
+      spriteID: 1a1ee147963f4bc4185ba04fbc0fa17c
+      internalID: -1491151174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_Cycle_Spritesheet_1
+      name: jump_SpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 428
-        y: 135
-        width: 210
-        height: 424
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        x: 297
+        y: 0
+        width: 297
+        height: 537
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5e732be3daae4f408d9552e97b21519
-      internalID: 875187065
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walk_Cycle_Spritesheet_2
-      rect:
-        serializedVersion: 2
-        x: 764
-        y: 135
-        width: 210
-        height: 424
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 85de8d606c846f645a7c6a091b5be751
-      internalID: 986166550
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walk_Cycle_Spritesheet_3
-      rect:
-        serializedVersion: 2
-        x: 1129
-        y: 134
-        width: 210
-        height: 424
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 17be76b38fc01c24e99940230a7e7f64
-      internalID: 305147315
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walk_Cycle_Spritesheet_4
-      rect:
-        serializedVersion: 2
-        x: 1480
-        y: 138
-        width: 210
-        height: 424
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e6afef65a3da884ebd0447f74d2d62d
-      internalID: 1502606496
+      spriteID: 0b38a70b3d7977f4e9f2dc6074ef3244
+      internalID: 1778322370
       vertices: []
       indices: 
       edges: []
@@ -212,11 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Walk_Cycle_Spritesheet_0: -1526786943
-      Walk_Cycle_Spritesheet_1: 875187065
-      Walk_Cycle_Spritesheet_2: 986166550
-      Walk_Cycle_Spritesheet_3: 305147315
-      Walk_Cycle_Spritesheet_4: 1502606496
+      jump_SpriteSheet_0: -1491151174
+      jump_SpriteSheet_1: 1778322370
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
