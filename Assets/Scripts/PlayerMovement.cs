@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private bool wasGrounded;
 
     private Animator playerAnimation;
+    //Lee - for the Game Over screen
+    public GameObject gameOverUI;
 
     private int jumpCount = 0; // To track how many jumps have been performed
     public int maxJumps = 2;   // The maximum number of jumps allowed (double jump)
@@ -122,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        DamageBehavior damageBehavior = collision.GetComponent<DamageBehavior>();
+        //DamageBehavior damageBehavior = collision.GetComponent<DamageBehavior>();
         DamageSource damageSource = collision.GetComponent<DamageSource>();
         if(damageSource != null)
         {
@@ -134,6 +136,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 Destroy(gameObject);
+                gameOverUI.SetActive(true);
             }
             Destroy(damageSource.gameObject);
         }

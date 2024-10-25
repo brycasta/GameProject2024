@@ -466,7 +466,6 @@ GameObject:
   - component: {fileID: 129229387}
   - component: {fileID: 129229389}
   - component: {fileID: 129229390}
-  - component: {fileID: 129229391}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -590,6 +589,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 0
+  gameOverUI: {fileID: 680659309}
   maxJumps: 2
   jumpSound: {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
   iFrameTime: 2
@@ -650,19 +650,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.1855532, y: -0.0949518}
   m_Size: {x: 2.218475, y: 4.4299026}
   m_Direction: 0
---- !u!114 &129229391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129229382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c0513c39fd536a48aaf4c6763dfb6a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOverScript: {fileID: 1485727700}
 --- !u!1 &269723687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,7 +1231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0513c39fd536a48aaf4c6763dfb6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverScript: {fileID: 0}
 --- !u!1 &317476272
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,7 +3122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0513c39fd536a48aaf4c6763dfb6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverScript: {fileID: 1485727700}
 --- !u!1 &1146941615
 GameObject:
   m_ObjectHideFlags: 0
