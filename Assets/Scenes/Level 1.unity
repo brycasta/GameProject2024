@@ -592,6 +592,8 @@ MonoBehaviour:
   gameOverUI: {fileID: 680659309}
   maxJumps: 2
   jumpSound: {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
+  breakSound: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
+  hurtSound: {fileID: 8300000, guid: fd25a15f9797641458336cccfb445343, type: 3}
   iFrameTime: 2
   flashNumber: 3
 --- !u!95 &129229389
