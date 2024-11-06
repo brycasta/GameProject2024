@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     //Lee - SFX variable
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
+    //Lee - Adding damage SFX
+    [SerializeField] private AudioClip breakSound;
+    [SerializeField] private AudioClip hurtSound;
     //Lee - IFrame Variables
     [Header("Invulnerability")]
     [SerializeField] private float iFrameTime;
@@ -132,10 +135,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 DeactivateShield();
                 StartCoroutine(Invulnerability());
+                SoundManager.instance.PlaySound(breakSound);
             }
             else
             {
                 Destroy(gameObject);
+                SoundManager.instance.PlaySound(hurtSound);
                 gameOverUI.SetActive(true);
             }
             Destroy(damageSource.gameObject);
