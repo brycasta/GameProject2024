@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -30,15 +29,12 @@ public class PlayerMovement : MonoBehaviour
     //Lee - SFX variable
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
-    //Lee - Adding damage SFX
-    [SerializeField] private AudioClip breakSound;
-    [SerializeField] private AudioClip hurtSound;
     //Lee - IFrame Variables
     [Header("Invulnerability")]
     [SerializeField] private float iFrameTime;
     [SerializeField] private int flashNumber;
     private SpriteRenderer spriteRenderer;
-    // Start is called before the first frame update
+
     void Awake()
     {
         //Lee - Getting the shield and deactivating it on awake
@@ -49,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
         playerAnimation = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); // Checks players feet is touching the ground 
@@ -78,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRB.velocity = new Vector2(0, playerRB.velocity.y);
         }
-        
+
 
         if (Input.GetButtonDown("Jump") && canJump && (isGrounded || jumpCount < maxJumps))
         {
@@ -107,13 +102,25 @@ public class PlayerMovement : MonoBehaviour
         playerAnimation.SetBool("OnGround", isGrounded);
     }
 
+    // New method to handle game over actions
+    public void TriggerGameOver()
+    {
+        // Activate the game over UI
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true);
+        }
+
+        // Destroy the player GameObject
+        Destroy(gameObject);
+    }
 
     //Lee - All three methods work with the shield
     void ActivateShield()
     {
         shield.SetActive(true);
     }
-    
+
     void DeactivateShield()
     {
         shield.SetActive(false);
@@ -123,25 +130,22 @@ public class PlayerMovement : MonoBehaviour
     {
         return shield.activeSelf;
     }
+
     // Lee - this block is for the colliders and shield
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        //DamageBehavior damageBehavior = collision.GetComponent<DamageBehavior>();
+
         DamageSource damageSource = collision.GetComponent<DamageSource>();
-        if(damageSource != null)
+        if (damageSource != null)
         {
-            if(HasShield())
+            if (HasShield())
             {
                 DeactivateShield();
                 StartCoroutine(Invulnerability());
-                SoundManager.instance.PlaySound(breakSound);
             }
             else
             {
-                Destroy(gameObject);
-                SoundManager.instance.PlaySound(hurtSound);
-                gameOverUI.SetActive(true);
+                TriggerGameOver();
             }
             Destroy(damageSource.gameObject);
         }
@@ -151,13 +155,14 @@ public class PlayerMovement : MonoBehaviour
             ActivateShield();
             Destroy(shieldPowerUp.gameObject);
         }
-        
+
     }
+
     // Lee - This code makes the player flash and turn invincible
     private IEnumerator Invulnerability()
     {
-        Physics2D.IgnoreLayerCollision(7,8, true);
-        for(int i = 0; i< flashNumber; i++)
+        Physics2D.IgnoreLayerCollision(7, 8, true);
+        for (int i = 0; i < flashNumber; i++)
         {
             spriteRenderer.color = new Color(1, 0, 0, 0.5f);
             yield return new WaitForSeconds(iFrameTime / (flashNumber * 2));
