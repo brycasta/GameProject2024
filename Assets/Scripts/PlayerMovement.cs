@@ -18,26 +18,34 @@ public class PlayerMovement : MonoBehaviour
     private bool wasGrounded;
 
     private Animator playerAnimation;
-    //Lee - for the Game Over screen
+
+    // Game Over screen
     public GameObject gameOverUI;
 
-    private int jumpCount = 0; // To track how many jumps have been performed
-    public int maxJumps = 2;   // The maximum number of jumps allowed (double jump)
+    private int jumpCount = 0; // To track how many jumps have been performed //Bryan Castaneda
+    public int maxJumps = 2;   // The maximum number of jumps allowed (double jump) //Bryan Castaneda
     private bool canJump = true;
-    //Lee - Shield variable
+
+    // Shield variable
     GameObject shield;
-    //Lee - SFX variable
+
+    // SFX variables
     [Header("SFX")]
     [SerializeField] private AudioClip jumpSound;
-    //Lee - IFrame Variables
+    [SerializeField] private AudioClip breakSound;
+    [SerializeField] private AudioClip hurtSound;
+
+    // Invulnerability (iFrame) Variables
     [Header("Invulnerability")]
     [SerializeField] private float iFrameTime;
     [SerializeField] private int flashNumber;
     private SpriteRenderer spriteRenderer;
 
+    private bool isGameOver = false; // New flag for game over state
+
     void Awake()
     {
-        //Lee - Getting the shield and deactivating it on awake
+        // Initialize components
         shield = transform.Find("Shield").gameObject;
         DeactivateShield();
         playerRB = GetComponent<Rigidbody2D>();
@@ -47,7 +55,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); // Checks players feet is touching the ground 
+        if (isGameOver) return; // Stop processing if the game is over
+
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer); // Checks if player is grounded
 
         // Reset jump count if the player lands on the ground
         if (isGrounded && !wasGrounded)
@@ -58,13 +68,13 @@ public class PlayerMovement : MonoBehaviour
 
         direction = Input.GetAxis("Horizontal");
 
-        if (direction > 0f) //Player movement going and facing right
+        if (direction > 0f) // Player movement going and facing right
         {
             playerRB.velocity = new Vector2(direction * speed, playerRB.velocity.y);
             transform.localScale = new Vector2(0.4314091f, 0.4314091f);
             GetComponent<SpriteRenderer>().flipX = false; // Facing right
         }
-        else if (direction < 0f) //Player movement going and facing left
+        else if (direction < 0f) // Player movement going and facing left
         {
             playerRB.velocity = new Vector2(direction * speed, playerRB.velocity.y);
             GetComponent<SpriteRenderer>().flipX = true; // Facing left
@@ -74,92 +84,102 @@ public class PlayerMovement : MonoBehaviour
             playerRB.velocity = new Vector2(0, playerRB.velocity.y);
         }
 
-
         if (Input.GetButtonDown("Jump") && canJump && (isGrounded || jumpCount < maxJumps))
         {
             playerRB.velocity = new Vector2(playerRB.velocity.x, jumpSpeed);
             jumpCount++;  // Increment jump count
             canJump = false; // Disable further jumps until button is released
-            //Lee - For playing the jump sound
-            if (Input.GetButtonDown("Jump"))
+
+            // Play jump sound
+            if (SoundManager.instance != null && jumpSound != null)
             {
-                Debug.Log("AudioPlaying");
                 SoundManager.instance.PlaySound(jumpSound);
             }
         }
 
-        // Allow jump again after button release (prevents multiple jumps from holding the button)
         if (Input.GetButtonUp("Jump"))
         {
             canJump = true;
         }
 
-        // Update the grounded state for the next frame
         wasGrounded = isGrounded;
 
-        //Animation Scripts - Bryan
+        // Animation updates
         playerAnimation.SetFloat("Speed", Mathf.Abs(playerRB.velocity.x));
         playerAnimation.SetBool("OnGround", isGrounded);
     }
 
-    // New method to handle game over actions
     public void TriggerGameOver()
     {
-        // Activate the game over UI
         if (gameOverUI != null)
         {
-            gameOverUI.SetActive(true);
+            gameOverUI.SetActive(true); // Activate the game over UI
         }
 
-        // Destroy the player GameObject
-        Destroy(gameObject);
+        // Set game over state
+        isGameOver = true;
+
+        // Stop player movement
+        playerRB.velocity = Vector2.zero;
+
+        // Play hurt sound
+        if (SoundManager.instance != null && hurtSound != null)
+        {
+            SoundManager.instance.PlaySound(hurtSound);
+        }
+
     }
 
-    //Lee - All three methods work with the shield
-    void ActivateShield()
+    // Shield methods created by Lee
+    public void ActivateShield()
     {
         shield.SetActive(true);
     }
 
-    void DeactivateShield()
+   public void DeactivateShield()
     {
         shield.SetActive(false);
     }
 
-    bool HasShield()
+  public bool HasShield()
     {
         return shield.activeSelf;
     }
 
-    // Lee - this block is for the colliders and shield
+    // Handling collisions //Created by Lee
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         DamageSource damageSource = collision.GetComponent<DamageSource>();
+
         if (damageSource != null)
         {
             if (HasShield())
             {
                 DeactivateShield();
                 StartCoroutine(Invulnerability());
+                // Play shield break sound
+
+                SoundManager.instance.PlaySound(breakSound);
             }
             else
             {
-                TriggerGameOver();
+                SoundManager.instance.PlaySound(hurtSound);
+                TriggerGameOver(); // Call game over function if no shield
             }
-            Destroy(damageSource.gameObject);
+
+            Destroy(damageSource.gameObject); // Destroy the enemy or damage source
         }
+
         ShieldPowerUp shieldPowerUp = collision.GetComponent<ShieldPowerUp>();
         if (shieldPowerUp != null)
         {
             ActivateShield();
-            Destroy(shieldPowerUp.gameObject);
+            Destroy(shieldPowerUp.gameObject); // Destroy the shield power-up after activation
         }
-
     }
 
-    // Lee - This code makes the player flash and turn invincible
-    private IEnumerator Invulnerability()
+    // Invulnerability routine
+    public IEnumerator Invulnerability()
     {
         Physics2D.IgnoreLayerCollision(7, 8, true);
         for (int i = 0; i < flashNumber; i++)
@@ -170,6 +190,5 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(iFrameTime / (flashNumber * 2));
         }
         Physics2D.IgnoreLayerCollision(7, 8, false);
-
     }
 }

@@ -40,7 +40,7 @@ public class GroundEnemyMove : MonoBehaviour
 
             transform.position = position;
 
-            // Destroy the enemy if it moves too far off screen (optional)
+            // Destroy the enemy if it moves too far off screen 
             if (position.x < -12)
             {
                 Destroy(gameObject);
