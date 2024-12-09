@@ -1,9 +1,13 @@
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : MonoBehaviour //Created by Bryan Castaneda
+
+    //This script is so when the player is on a moving platform is rigidbody stays
+    //stuck to the platform and not fall off of it when it moves
 {
     private Vector3 lastPosition;
     private GameObject playerOnPlatform;
+
 
     void Start()
     {

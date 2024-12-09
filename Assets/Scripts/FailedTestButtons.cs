@@ -3,16 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverScript : MonoBehaviour //Created by Bryan Castaneda
+public class FailedTestButtons : MonoBehaviour
 {
-
-    public GameObject gameOverUI;  // Reference to the actual UI GameObject
-
-    
-    public void gameOver()
-    {
-        gameOverUI.SetActive(true);
-    }
 
     public void RestartGame()
     {
@@ -24,10 +16,5 @@ public class GameOverScript : MonoBehaviour //Created by Bryan Castaneda
     public void GoToMainMenu()
     {
         SceneManager.LoadSceneAsync(0);
-    }
-
-    public void TakeQuiz()
-    {
-        SceneManager.LoadSceneAsync(2);
     }
 }
