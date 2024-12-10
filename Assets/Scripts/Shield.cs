@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Lee - Whole Script
 public class Shield : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;

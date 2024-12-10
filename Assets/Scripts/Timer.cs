@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+//Lee - Whole Script
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
