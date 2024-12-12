@@ -8,4 +8,11 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
     }
+
+  
+  //Fanial W.
+  public void Settings(){
+
+    SceneManager.LoadSceneAsync(3);
+  }
 }
