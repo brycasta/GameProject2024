@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Update()
+    void Update() //Bryan
     {
         if (isGameOver) return; // Stop processing if the game is over
 
@@ -258,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
         UpdateAmmoUI();
     }
 
-    public void TriggerGameOver()
+    public void TriggerGameOver() //Bryan
     {
         if (gameOverUI != null)
         {

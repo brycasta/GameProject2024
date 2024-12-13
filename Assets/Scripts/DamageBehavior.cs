@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Lee - Whole Script
 public class DamageBehavior : MonoBehaviour
 {
     // Reference to the GameOverScript that triggers the Game Over screen (uncomment if needed)
